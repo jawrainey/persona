@@ -10,7 +10,7 @@ public class CredibilityController : MonoBehaviour {
 	public GameObject background;
 	float nextpunish = 0;
 
-	float worldTime;
+	float worldTime = 0;
 
 
 	// A horrible hack... 
@@ -48,7 +48,7 @@ public class CredibilityController : MonoBehaviour {
 	void Update () {
 		updateBar ();
 
-		worldTime = GameObject.Find ("ClockController").GetComponent<AClockController> ().worldTime;
+		worldTime = GameObject.Find ("ClockController").GetComponent<ClockController> ().worldTime;
 
 		if (worldTime > nextpunish) {
 			detectSchedule ();

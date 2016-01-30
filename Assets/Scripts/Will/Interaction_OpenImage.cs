@@ -10,10 +10,6 @@ public class Interaction_OpenImage : MonoBehaviour {
 	public float debouncing = 2f;
 	// ?
 	public Sprite shownImage;
-
-	void Start () {
-		
-	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -25,7 +21,7 @@ public class Interaction_OpenImage : MonoBehaviour {
 		debounceTime = debouncing;
 		//
 		var clock = GameObject.Find ("ClockController");
-		clock.GetComponent<AClockController> ().paused = true;
+		clock.GetComponent<ClockController> ().paused = true;
 		//
 		var splash = GameObject.Find ("ImageSplash");
 		splash.GetComponent<SpriteRenderer> ().sprite = shownImage;
