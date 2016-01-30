@@ -1,39 +1,24 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 public class AClockController : MonoBehaviour {
-	// ??
+	// Factor used to create in-game time; 60secs IRL is 1h in-game
 	public float timeFactor = 60f;
+	// Game starts at 06am
 	public float worldTime = 21600f;
-	// ??
-	public GameObject clockFace;
-	public GameObject clockHand; 
-	// Used inside ImageSplashTagOut
+	// Used to pause time on item interactions
 	public bool paused = false;
-	// ??
-	Transform faceTransform;
-	Transform handTransform;
-	
-	// Update is called once per frame
+
 	void Update () {
-		
-		// clock stuff
-		if (paused == false) {
+		if (!paused)
 			worldTime = (worldTime + timeFactor * Time.deltaTime) % 86400f;
-		}
-
-		faceTransform = clockFace.GetComponent<Transform>();
-		handTransform = clockHand.GetComponent<Transform>();
-
-		var angle = 360f * (worldTime / 43200f);
-		// Find relative position of clock hand
-		float adjacent = Mathf.Cos (angle * Mathf.Deg2Rad) * handTransform.localScale.y;
-		float opposite = Mathf.Sin (angle * Mathf.Deg2Rad) * handTransform.localScale.y;
-		// calcualtes real position of clock hand
-		Vector3 pos = new Vector3 (opposite/2, adjacent/2, 0) + faceTransform.position;
-		handTransform.position = pos;
-		// Managing the rotation hand of the clock.
-		Quaternion rot = Quaternion.AngleAxis (angle, new Vector3 (0, 0, -30));
-		handTransform.localRotation = rot;
 	}
+
+	void OnGUI() {
+		TimeSpan timeSpan = TimeSpan.FromSeconds(worldTime);
+		GUI.Label(new Rect(10, 10, 100, 20), 
+			string.Format("{0:D2}:{1:D2}", timeSpan.Hours, timeSpan.Minutes));
+	}
+		
 }

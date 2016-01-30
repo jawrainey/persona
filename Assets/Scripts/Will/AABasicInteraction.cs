@@ -13,7 +13,6 @@ public class AABasicInteraction : MonoBehaviour {
 	// 
 	float debounceTime = 0f;
 
-	// Update is called once per frame
 	void Update () {
 		debounceTime = debounceTime - Time.deltaTime;
 	}

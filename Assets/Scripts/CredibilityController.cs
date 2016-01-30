@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System;
 
 public class CredibilityController : MonoBehaviour {
 
@@ -50,7 +49,6 @@ public class CredibilityController : MonoBehaviour {
 		updateBar ();
 
 		worldTime = GameObject.Find ("ClockController").GetComponent<AClockController> ().worldTime;
-
 
 		if (worldTime > nextpunish) {
 			detectSchedule ();
