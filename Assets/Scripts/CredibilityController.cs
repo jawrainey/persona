@@ -48,7 +48,7 @@ public class CredibilityController : MonoBehaviour {
 	void Update () {
 		updateBar ();
 
-		worldTime = GameObject.Find ("ClockController").GetComponent<ClockController> ().worldTime;
+		// worldTime = GameObject.Find ("ClockController").GetComponent<ClockController> ().worldTime;
 
 		if (worldTime > nextpunish) {
 			detectSchedule ();

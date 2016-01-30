@@ -7,6 +7,11 @@ public class CameraPosition : MonoBehaviour {
 	public float yOffset = 2.3f;
 
 	void Update () {
-		transform.position = GameObject.Find ("Player").transform.position + new Vector3(xOffset,yOffset, transform.position.z);	
+		Vector3 playerPosition = GameObject.Find ("Player").transform.position + new Vector3(xOffset,yOffset, 0);
+		// Players position is relative to camera
+		playerPosition.z = transform.position.z;
+		// Camera position is players current position
+		transform.position = playerPosition;
+	
 	}
 }
