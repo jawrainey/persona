@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class CredibilityController : MonoBehaviour {
 
@@ -8,6 +9,10 @@ public class CredibilityController : MonoBehaviour {
 
 	public GameObject foreground;
 	public GameObject background;
+	float nextpunish = 0;
+
+	float worldTime;
+
 
 	// A horrible hack... 
 	// The int is seconds that represent time of day (19:00 and 20:00) and
@@ -43,7 +48,13 @@ public class CredibilityController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		updateBar ();
-		detectSchedule ();
+
+		worldTime = GameObject.Find ("ClockController").GetComponent<AClockController> ().worldTime;
+
+
+		if (worldTime > nextpunish) {
+			detectSchedule ();
+		}
 	}
 
 	void updateBar() {
@@ -57,8 +68,6 @@ public class CredibilityController : MonoBehaviour {
 
 	// 
 	void detectSchedule() {
-
-		var worldTime = GameObject.Find("ClockController").GetComponent<AClockController>().worldTime;
 
 		foreach (KeyValuePair<int, string> entry in schedule) {
 			// 3600 per min
@@ -78,10 +87,15 @@ public class CredibilityController : MonoBehaviour {
 				// check if player is within X area.
 				var player = GameObject.Find("Player").GetComponent<Transform>();
 
-				// ??
+				// Hi Will, this was fixed.. over to you!
 				if (!(player.position.x < rightEdge && player.position.x > leftEdge) &&
-					!(player.position.y < bottomEdge && player.position.y > topEdge)) {
-						credibility -= 10;
+					!(player.position.y < bottomEdge && player.position.y > topEdge)) 
+				{
+					credibility -= 20;
+					// We will eventually show this on-screen, but for now, I'm printing it to the console
+					print ("-20 -- Missed Event: " + entry.Value); 
+					// Cooldown: cannot lose points during this time.
+					nextpunish = (entry.Key + 3600) % 86400;
 				}
 			}
 		}
