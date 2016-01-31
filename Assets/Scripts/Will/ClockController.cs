@@ -5,8 +5,8 @@ using System.Collections;
 public class ClockController : MonoBehaviour {
 	// Factor used to create in-game time; 60secs IRL is 1h in-game
 	public float timeFactor = 60f;
-	// Game starts at 06am
-	public float worldTime = 21600f;
+	// Game starts at 18:00
+	public float worldTime = 64800f;
 	// Used to pause time on item interactions
 	public bool paused = false;
 	// ??

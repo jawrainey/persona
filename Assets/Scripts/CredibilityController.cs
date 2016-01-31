@@ -18,30 +18,12 @@ public class CredibilityController : MonoBehaviour {
 	// String represents the name of the object overlayed at the scheledued location,
 	// e.g. where the character should be at a given point in time.
 	public Dictionary<int, string> schedule = new Dictionary<int, string> () {
-		{0, "CubeOne"},
-		{3600, "CubeOne"},
-		{7200, "CubeOne"},
-		{10800, "CubeOne"},
-		{14400, "CubeOne"},
-		{18000, "CubeOne"},
-		{21600, "CubeOne"},
-		{25200, "CubeOne"},
-		{28800, "CubeOne"},
-		{32400, "CubeOne"},
-		{36000, "CubeOne"},
-		{39600, "CubeOne"},
-		{43200, "CubeOne"},
-		{46800, "CubeOne"},
-		{50400, "CubeOne"},
-		{54000, "CubeOne"},
-		{57600, "CubeOne"},
-		{61200, "CubeOne"},
-		{64800, "CubeOne"},
-		{68400, "CubeOne"},
-		{72000, "CubeOne"},
-		{75600, "CubeOne"},
-		{79200, "CubeOne"},
-		{82800, "CubeOne"}
+		{0, "Abba"},      //12
+		{7200, "Barman"},  //02
+		{14400, "Bowie"}, //04
+		{68400, "Beerbox"}, // 19
+		{72000, "Microphone"}, // 20
+		{75600, "Djdecks"}  // 21
 	};
 
 	void Update () {
