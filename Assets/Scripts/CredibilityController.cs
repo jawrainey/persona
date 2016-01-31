@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class CredibilityController : MonoBehaviour {
-
+	// ??
 	public float credibility = 100f;
-
+	// ??
 	public GameObject foreground;
 	public GameObject background;
+	// ??
 	float nextpunish = 0;
-
 	float worldTime;
 
 
@@ -44,7 +44,6 @@ public class CredibilityController : MonoBehaviour {
 		{82800, "CubeOne"}
 	};
 
-	// Update is called once per frame
 	void Update () {
 		updateBar ();
 
@@ -78,7 +77,7 @@ public class CredibilityController : MonoBehaviour {
 				// four edges
 				var leftEdge = t.position.x - t.localScale.x / 2;
 				var rightEdge = t.position.x + t.localScale.x / 2;
-		
+
 				var bottomEdge = t.position.y - t.localScale.y / 2;
 				var topEdge = t.position.y + t.localScale.y / 2;
 
@@ -90,8 +89,7 @@ public class CredibilityController : MonoBehaviour {
 					!(player.position.y < bottomEdge && player.position.y > topEdge)) 
 				{
 					credibility -= 20;
-					// We will eventually show this on-screen, but for now, I'm printing it to the console
-					print ("-20 -- Missed Event: " + entry.Value); 
+					GameObject.Find("ClockController").GetComponent<ClockController>().health = (int)credibility;
 					// Cooldown: cannot lose points during this time.
 					nextpunish = (entry.Key + 3600) % 86400;
 				}
