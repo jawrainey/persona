@@ -34,6 +34,7 @@ public class CredibilityController : MonoBehaviour {
 		if (worldTime > nextpunish) {
 			detectSchedule ();
 		}
+		if (credibility <= 0) GameOver ();
 	}
 
 	void updateBar() {
@@ -51,10 +52,13 @@ public class CredibilityController : MonoBehaviour {
 		foreach (KeyValuePair<int, string> entry in schedule) {
 			// 3600 per min
 			// {68400, "CubeOne"}
+
+			// if it's within an hour 
 			if (entry.Key == (Mathf.Floor (worldTime / 3600) * 3600)) {
 				var box = GameObject.Find (entry.Value);
+
 				// work out bounding box :: t means scheledLocation
-				var t = box.GetComponent<Transform>();
+				var t = box.GetComponent<Transform> ();
 
 				// four edges
 				var leftEdge = t.position.x - t.localScale.x / 2;
@@ -64,16 +68,16 @@ public class CredibilityController : MonoBehaviour {
 				var topEdge = t.position.y + t.localScale.y / 2;
 
 				// check if player is within X area.
-				var player = GameObject.Find("Player").GetComponent<Transform>();
+				var player = GameObject.Find ("Player").GetComponent<Transform> ();
 
 				// Hi Will, this was fixed.. over to you!
 				if (!(player.position.x < rightEdge && player.position.x > leftEdge) &&
-					!(player.position.y < bottomEdge && player.position.y > topEdge)) 
-				{
+				    !(player.position.y < bottomEdge && player.position.y > topEdge)) {
 					credibility -= 20;
-					GameObject.Find("ClockController").GetComponent<ClockController>().health = (int)credibility;
-					// Cooldown: cannot lose points during this time.
+					GameObject.Find ("ClockController").GetComponent<ClockController> ().health = (int)credibility;
+					// Cooldown: cannot lose points during 30 mins cooldown;
 					nextpunish = (entry.Key + 3600) % 86400;
+					Debug.Log (nextpunish.ToString ());
 				}
 			}
 		}
@@ -81,6 +85,7 @@ public class CredibilityController : MonoBehaviour {
 	}
 
 	void GameOver() {
-		// if credability <= 0; send to a new sceen where we display a new game over and return menu
+		// BUG: current game does not end as health does not go below 40%
+		UnityEngine.SceneManagement.SceneManager.LoadScene("game-over");
 	}
 }
