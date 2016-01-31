@@ -7,7 +7,10 @@ public class PlayerMovement : MonoBehaviour {
 
 	private float direction;
 
+	public Animator anim;
+
 	void Start() {
+
 		direction = transform.localScale.x;
 	}
 
@@ -20,11 +23,17 @@ public class PlayerMovement : MonoBehaviour {
 		// The speed to move in the given direction
 		transform.Translate(velocity * Time.deltaTime, 0, 0);
 		// right
-		if (velocity > 0)
-			transform.localScale = new Vector2(direction, transform.localScale.y);
+		if (velocity > 0) {
+			transform.localScale = new Vector2 (direction, transform.localScale.y);
+			anim.SetBool ("walking", true);
+		}
 		// left
-		else if (velocity < 0)
-			transform.localScale = new Vector2(-direction, transform.localScale.y);
-
+		else if (velocity < 0) {
+			transform.localScale = new Vector2 (-direction, transform.localScale.y);
+			anim.SetBool ("walking", true);
+		}
+		if (velocity == 0) {
+			anim.SetBool ("walking", false);
+		}
 	}
 }
