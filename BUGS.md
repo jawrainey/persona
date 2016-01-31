@@ -1,3 +1,0 @@
-1. Flip the character to face arrow directions...
-2. Add NPCs
-3. Sound?
